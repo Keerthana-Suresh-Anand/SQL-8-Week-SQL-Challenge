@@ -21,6 +21,8 @@ ORDER BY total_amount_spent DESC;
 - B spent $74
 - C spent $36
 
+---
+
 **2. How many days has each customer visited the restaurant?**
 ```sql
 SELECT customer_id, 
@@ -37,7 +39,9 @@ GROUP BY customer_id;
 - A visited the restaurant 4 days
 - B visited the restaurant 6 days
 - C svisited the restaurant 2 days
-  
+
+---
+
 **3. What was the first item from the menu purchased by each customer?**
 ```sql
 WITH first_item_ordered AS
@@ -64,7 +68,9 @@ WHERE row_numb = 1;
 - A purchased sushi 
 - B purchased curry 
 - C purchased ramen 
-  
+
+---
+ 
 **4. What is the most purchased item on the menu and how many times was it purchased by all customers?**
 ```sql
 SELECT m.product_name AS most_purchased_item,
@@ -82,6 +88,8 @@ LIMIT 1;
 |ramen|8|
 
 - ramen is the most purchased item on the menu, ordered 8 times 
+
+---
 
 **5. Which item was the most popular for each customer?**
 ```sql
@@ -111,6 +119,8 @@ WHERE dense_rank_per_customer = 1;
 - A and C's favourite item is ramen
 - B's favourite is all three - ramen, curry and sushi
 
+---
+
 **6. Which item was purchased first by the customer after they became a member?**
 ```sql
 WITH item_ordered_after_member AS
@@ -136,6 +146,8 @@ WHERE row_numb = 1;
 - A purchased curry after becoming a member 
 - B purchased sushi after becoming a member 
 - C is not a member 
+
+---
 
 **7. Which item was purchased just before the customer became a member?**
 ```sql
@@ -175,7 +187,9 @@ JOIN CTE_max_row_number cte2
 - A purchased curry before becoming a member 
 - B purchased sushi before becoming a member 
 - C is not a member
-  
+
+---
+ 
 **8. What is the total items and amount spent for each member before they became a member?**
 ```sql
 SELECT s.customer_id,
@@ -198,6 +212,8 @@ ORDER BY s.customer_id;
 - A purchased 2 item for $25 before becoming a member 
 - B purchased 3 items for $40 before becoming a member 
 - C is not a member
+
+---
 
 **9. If each $1 spent equates to 10 points and sushi has a 2x points multiplier - how many points would each customer have?**
 ```sql
@@ -229,7 +245,11 @@ ORDER BY customer_id;
 - B has 940 points
 - C has 360 points
 
+---
+
 **10. In the first week after a customer joins the program (including their join date) they earn 2x points on all items, not just sushi - how many points do customer A and B have at the end of January?**
+
+---
 
 ## Bonus Questions
 
@@ -272,6 +292,8 @@ LEFT JOIN dannys_diner.members
   ON s.customer_id = members.customer_id
 ORDER BY s.customer_id, s.order_date;
 ```
+
+---
 
 **2. Rank all the things**
 Danny also requires further information about the ranking of customer products, but he purposely does not need the ranking for non-member purchases so he expects null ranking values for the records when customers are not yet part of the loyalty program
