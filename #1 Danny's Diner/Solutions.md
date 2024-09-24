@@ -249,6 +249,32 @@ ORDER BY customer_id;
 
 **10. In the first week after a customer joins the program (including their join date) they earn 2x points on all items, not just sushi - how many points do customer A and B have at the end of January?**
 
+```sql
+SELECT s.customer_id,
+	   SUM(CASE
+       		WHEN s.order_date BETWEEN members.join_date AND members.join_date+ 6 THEN m.price*20
+			ELSE
+            	CASE
+					WHEN m.product_name = 'sushi' THEN m.price*20
+            		ELSE m.price*10
+               	END
+       END) AS member_points
+FROM dannys_diner.sales s
+JOIN dannys_diner.members 
+	ON s.customer_id = members.customer_id
+JOIN dannys_diner.menu m
+	ON s.product_id = m.product_id
+WHERE EXTRACT(MONTH from order_date) = 1 
+GROUP BY s.customer_id;
+```
+|customer_id|member_points|
+|-----------|------------|
+|A|1370|
+|B|820|
+
+- A has 1370 member points 
+- B has 820 member points
+- C is not a member
 ---
 
 ## Bonus Questions
