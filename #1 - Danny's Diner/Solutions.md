@@ -1,5 +1,5 @@
 # [#1 - Danny's Diner](https://8weeksqlchallenge.com/case-study-1/)
-[<img src="https://github.com/Keerthana-Suresh-Anand/SQL-8-Week-SQL-Challenge/raw/main/1.png" alt="Danny's Diner" width="180"/>](https://8weeksqlchallenge.com/case-study-1/)
+[<img src="https://github.com/Keerthana-Suresh-Anand/SQL-8-Week-SQL-Challenge/raw/main/Images/%231.png" alt="Danny's Diner" width="180"/>](https://8weeksqlchallenge.com/case-study-1/)
 
 ## Problem Statement
 Danny owns a Japanese diner and has collected some data from the first few months of operation. He would like to use the data to give his customers a more personalized experience.
