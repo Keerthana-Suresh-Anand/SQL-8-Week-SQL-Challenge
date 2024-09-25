@@ -1,5 +1,5 @@
 # [#1 - Danny's Diner](https://8weeksqlchallenge.com/case-study-1/)
-[<img src="https://github.com/Keerthana-Suresh-Anand/SQL-8-Week-SQL-Challenge/raw/main/1.png" alt="Danny's Diner" width="200"/>](https://8weeksqlchallenge.com/case-study-1/)
+[<img src="https://github.com/Keerthana-Suresh-Anand/SQL-8-Week-SQL-Challenge/raw/main/1.png" alt="Danny's Diner" width="180"/>](https://8weeksqlchallenge.com/case-study-1/)
 
 **1. What is the total amount each customer spent at the restaurant?**
 ```sql
