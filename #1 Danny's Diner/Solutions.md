@@ -87,7 +87,7 @@ LIMIT 1;
 |-------------------|---------------------|
 |ramen|8|
 
-- ramen is the most purchased item on the menu, ordered 8 times 
+- Ramen is the most purchased item on the menu, ordered 8 times 
 
 ---
 
