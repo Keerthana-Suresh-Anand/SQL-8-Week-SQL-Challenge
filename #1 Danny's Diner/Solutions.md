@@ -1,6 +1,14 @@
 # [#1 - Danny's Diner](https://8weeksqlchallenge.com/case-study-1/)
 [<img src="https://github.com/Keerthana-Suresh-Anand/SQL-8-Week-SQL-Challenge/raw/main/1.png" alt="Danny's Diner" width="180"/>](https://8weeksqlchallenge.com/case-study-1/)
 
+## Problem Statement
+Danny owns a Japanese diner and has collected some data from the first few months of operation. He would like to use the data to give his customers a more personalized experience.
+
+## Entity Relationship Diagram
+<img width="321" alt="#1 - ERD" src="https://github.com/user-attachments/assets/ba512e04-0c42-41c5-9efa-2b515177c6dc">
+
+
+## Questions and Solutions
 **1. What is the total amount each customer spent at the restaurant?**
 ```sql
 SELECT sales.customer_id,
