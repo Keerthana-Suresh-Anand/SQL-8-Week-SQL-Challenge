@@ -136,13 +136,13 @@ CREATE TEMPORARY TABLE cleaned_runner_orders AS
 
 ```sql
 ALTER TABLE cleaned_runner_orders
-ALTER COLUMN pickup_time TYPE TIMESTAMP USING pickup_time::TIMESTAMP;
+MODIFY COLUMN pickup_time TIMESTAMP;
 
 ALTER TABLE cleaned_runner_orders
-ALTER COLUMN distance TYPE FLOAT USING distance::FLOAT;
+MODIFY COLUMN distance FLOAT;
 
 ALTER TABLE cleaned_runner_orders
-ALTER COLUMN duration TYPE INTEGER USING duration::INTEGER;
+MODIFY COLUMN duration INT;
  ```
 
 | order_id | runner_id | pickup_time          | distance | duration | cancellation            |
@@ -157,4 +157,18 @@ ALTER COLUMN duration TYPE INTEGER USING duration::INTEGER;
 | 8        | 2         | 2020-01-10 00:15:02  | 23.4     | 15       | null                     |
 | 9        | 2         | null                 | null     | null     | Customer Cancellation     |
 | 10       | 1         | 2020-01-11 18:50:20  | 10       | 10       | null                     |
+
+
+```sql
+DESCRIBE cleaned_runner_orders;
+```
+
+| Field   | Type | Null | Key | Default | Extra|
+|---------------|------|---|-------|--------|----|
+| order_id      | int       | YES|      | NULL          |NULL|
+| runner_id     | int       | YES|     | NULL          |NULL|
+| pickup_time   | timestamp | YES|     | NULL          |NULL|
+| distance      | float     | YES|     | NULL          |NULL|
+| duration      | int       | YES|     | NULL          |NULL|
+| cancellation   | varchar(23) | YES|    | NULL          |NULL|
 
