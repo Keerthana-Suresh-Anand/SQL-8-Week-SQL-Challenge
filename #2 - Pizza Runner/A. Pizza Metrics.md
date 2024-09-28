@@ -1,5 +1,5 @@
 # [#2 - Pizza Runner](https://8weeksqlchallenge.com/case-study-2/)
-
+# A. Pizza Metrics
 ## Questions and Solutions
 
 **1. How many pizzas were ordered?**
