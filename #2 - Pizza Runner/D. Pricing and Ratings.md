@@ -75,17 +75,18 @@ SELECT * FROM runner_ratings;
 |8|4|
 |10|5|
 ---
-**4.Using your newly generated table - can you join all of the information together to form a table which has the following information for successful deliveries?
-customer_id
-order_id
-runner_id
-rating
-order_time
-pickup_time
-Time between order and pickup
-Delivery duration
-Average speed
+**4.Using your newly generated table - can you join all of the information together to form a table which has the following information for successful deliveries?  
+customer_id  
+order_id  
+runner_id  
+rating  
+order_time  
+pickup_time  
+Time between order and pickup  
+Delivery duration  
+Average speed  
 Total number of pizzas**
+
 ```sql
 SELECT 
   c.customer_id, 
