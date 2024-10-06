@@ -1,4 +1,4 @@
-# [#2 - Pizza Runner](https://8weeksqlchallenge.com/case-study-3/)
+# [#3 - Foodie-Fi](https://8weeksqlchallenge.com/case-study-3/)
 
 # B. Data Analysis Questions
 
