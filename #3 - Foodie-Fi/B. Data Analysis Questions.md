@@ -147,9 +147,104 @@ ORDER BY plan_id;
 |4|churn|	236|	23.6|
 ---
 **8. How many customers have upgraded to an annual plan in 2020?**
-
+```sql
+WITH cte_previous_plans AS
+(
+  SELECT 
+    s.customer_id, 
+    s.start_date, 
+    p.plan_name, 
+    LAG(p.plan_name) OVER (PARTITION BY s.customer_id ORDER BY s.start_date) AS previous_plan
+  FROM subscriptions s
+  JOIN plans p
+    ON s.plan_id = p.plan_id)
+SELECT COUNT(DISTINCT customer_id) AS customers_upgraded_to_annual
+FROM cte_previous_plans
+WHERE 
+  plan_name = 'pro annual'
+  AND previous_plan NOT LIKE '%annual%' 
+  AND year(start_date) = 2020;
+```
+|customers_upgraded_to_annual|
+|--|
+|195|
+---
 **9. How many days on average does it take for a customer to an annual plan from the day they join Foodie-Fi?**
-
+```sql
+SELECT ROUND(AVG(datediff(s2.start_date, s1.start_date)),1) as avg_time_to_upgrade_to_annual
+FROM subscriptions s1
+JOIN subscriptions s2
+ ON s1.customer_id = s2.customer_id
+ AND s1.plan_id = 0 
+ AND s2.plan_id = 3;
+```
+|avg_time_to_upgrade_to_annual|
+|--|
+|104.6|
+---
 **10. Can you further breakdown this average value into 30 day periods (i.e. 0-30 days, 31-60 days etc)**
-
+```sql
+WITH cte_days_to_upgrade_to_annual AS
+ (SELECT s1.customer_id, s1.start_date AS trial_start_date, s2.start_date AS annual_upgrade_date, datediff(s2.start_date, s1.start_date) AS days_to_upgrade_to_annual
+ FROM subscriptions s1
+ JOIN subscriptions s2
+ ON s1.customer_id = s2.customer_id
+ AND s1.plan_id = 0 
+ AND s2.plan_id = 3)
+SELECT 
+CASE
+WHEN days_to_upgrade_to_annual BETWEEN 0 AND 30 THEN '0-30 days'
+WHEN days_to_upgrade_to_annual BETWEEN 31 AND 60 THEN '31-60 days'
+WHEN days_to_upgrade_to_annual BETWEEN 61 AND 90 THEN '61-90 days'
+WHEN days_to_upgrade_to_annual BETWEEN 91 AND 120 THEN '91-120 days'
+WHEN days_to_upgrade_to_annual BETWEEN 121 AND 150 THEN '121-150 days'
+WHEN days_to_upgrade_to_annual BETWEEN 151 AND 180 THEN '151-180 days'
+WHEN days_to_upgrade_to_annual BETWEEN 181 AND 210 THEN '181-210 days'
+WHEN days_to_upgrade_to_annual BETWEEN 211 AND 240 THEN '211-240 days'
+WHEN days_to_upgrade_to_annual BETWEEN 241 AND 270 THEN '241-270 days'
+WHEN days_to_upgrade_to_annual BETWEEN 271 AND 300 THEN '271-300 days'
+WHEN days_to_upgrade_to_annual BETWEEN 301 AND 330 THEN '301-330 days'
+WHEN days_to_upgrade_to_annual BETWEEN 331 AND 360 THEN '331-360 days'
+ELSE '361+ days'
+END AS days_grouping,
+COUNT(customer_id) AS no_of_customers
+FROM cte_days_to_upgrade_to_annual
+GROUP BY days_grouping;
+```
+| Days Grouping    | No. of Customers |
+|------------------|------------------|
+| 0-30 days        | 49               |
+| 31-60 days       | 24               |
+| 61-90 days       | 34               |
+| 91-120 days      | 35               |
+| 121-150 days     | 42               |
+| 151-180 days     | 36               |
+| 181-210 days     | 26               |
+| 211-240 days     | 4                |
+| 241-270 days     | 5                |
+| 271-300 days     | 1                |
+| 301-330 days     | 1                |
+| 331-360 days     | 1                |
+---
 **11. How many customers downgraded from a pro monthly to a basic monthly plan in 2020?**
+```sql
+WITH cte_previous_plans AS
+(
+  SELECT 
+    s.customer_id, 
+    s.start_date, 
+    p.plan_name, 
+    LAG(p.plan_name) OVER (PARTITION BY s.customer_id ORDER BY s.start_date) AS previous_plan
+  FROM subscriptions s
+  JOIN plans p
+    ON s.plan_id = p.plan_id)
+SELECT COUNT(DISTINCT customer_id) AS customers_downgraded_from_pro_to_basic_monthly
+FROM cte_previous_plans
+  WHERE plan_name = 'basic monthly'
+  AND previous_plan = 'pro monthly' 
+  AND year(start_date) = 2020;
+```
+|customers_downgraded_from_pro_to_basic_monthly|
+|--|
+|0|
+---
